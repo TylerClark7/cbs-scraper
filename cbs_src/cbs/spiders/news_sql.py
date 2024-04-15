@@ -5,10 +5,11 @@ class NewsSpider(scrapy.Spider):
 
     name = "articles_sql"
     start_urls = [
-        "https://www.cbsnews.com/minnesota/local-news/"
+        "https://www.cbsnews.com/minnesota/local-news/"     #Starting url
     ]
 
     def parse(self, response):
+        #Gets all the article URLSs in the page along with Article Title and Article Description
         article_list =  response.xpath('//*[@id="component-minnesota-news-topic-door-river"]/div[2]/article')
         for index, article in enumerate(article_list):
 
@@ -21,7 +22,7 @@ class NewsSpider(scrapy.Spider):
             yield scrapy.Request(article_url, callback=self.parse_article, meta={'index':index, 'article_title': article_title, 'description': description, 'url': article_url})
     
     def parse_article(self,response):
-
+        #Crawls actual article webpages. Captures all the text in each paragraph
         new_article = CbsItem()
         
         new_article['title'] = response.meta['article_title']

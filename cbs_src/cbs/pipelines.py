@@ -20,7 +20,10 @@ class MySQLPipeline:
         )
 
     def open_spider(self, spider):
-
+        """
+        When the DOCKERFILE is run while connecting to a MySQL DB not in a docker container this 
+        Retry Counter works. Currently is not working 
+        """
         retry_count = 0
 
         while retry_count != 5:
@@ -48,7 +51,9 @@ class MySQLPipeline:
         self.conn.close()
 
     def process_item(self, item, spider):
-        # Check if the URL already exists in the database
+
+        #Checking If the URL is in the DB is the current solution to eliminate duplicates 
+
         sql_select = "SELECT id FROM cbs_items WHERE url = %s"
         self.cursor.execute(sql_select, (item["url"],))
         result = self.cursor.fetchone()
@@ -70,7 +75,9 @@ class MySQLPipeline:
         return item
 
     def create_table_if_not_exists(self):
-        # Check if the table exists
+        # This function runs on the First use of Docker_compose
+        #Builds the Table in MySQL DB if Table does not exist 
+        
         table_name = "cbs_items"
         self.cursor.execute("SHOW TABLES LIKE %s", (table_name,))
         table_exists = bool(self.cursor.fetchone())
