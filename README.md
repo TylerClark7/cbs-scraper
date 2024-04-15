@@ -17,25 +17,25 @@ The function of this crawler is to scrape the local news page of CBS News Ex.
 <br> <br>
 www.cbsnews.com/{your-state}/local-news/
 
-When the docker comppose file is used, 2 containers start. One container will run a MYSQL Docker Image. The other container is a Python Scrapy Image. 
+When the docker comppose file is used, 2 containers start. One container will run a MYSQL Docker image , the other container is a Python Scrapy Image. 
 
-Once the compose file finishes a MySQL Database will start running on Localhost. 
+After the compose file finishes, a MySQL Database starts running on Localhost.
 
 Using Cron tasks we can then run the Python Image at any interval. (1 hour works well depending on location)
 
 # How to use
 
-Clone this repo and then make sure you are in the project directory
+1. Clone this repo navigate to the project directory
 ```
 git clone https://github.com/TylerClark7/cbs-scraper.git
 ```
 
-You then need to build your Dockerfile for the Python/Scrapy container 
+2. Build your Dockerfile for the Python/Scrapy container:
 
 ```
 docker build <image-name-of your-choice> .
 ```
-Because I am using Cron Jobs I chose to not build the Python image in the Docker-Compose file
+<strong>Note</strong>: Because I am using Cron Jobs I chose to not build the Python image in the Docker-Compose file
 
 <b>IMPORTANT NOTE</b>: The name you choose for your Python image needs to match the name in the Docker-Compose file
 
@@ -59,14 +59,14 @@ services:
 
 If you try to run this container before running docker compose up you will get errors.
 
-After the image has been built you can change into the docker folder and run docker compose up in detatched mode
+4. After the image has been built you can change into the docker folder and run docker compose up in detatched mode
 
 ```
 $ cd docker
 $ docker compose -d        
 ```
 
-Your MySQL Docker container should be up and running. You will get initial Data present on the web page added into the DB. The python script will NOT run agian unless you run the docker container <i>python-image</i> again. 
+Your MySQL Docker container should now be up and running. Initial data present on the web page will be added into the DB. The Python script will NOT run again unless you run the docker container `python-image` again. The python script will NOT run agian unless you run the docker container <i>python-image</i> again. 
 
 The Mysql runs on the netwrok "docker_default". When you run the container make sure you include the netwrok tag --network
 
