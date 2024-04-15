@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  scraper:
+    image: please-v3
+
+    container_name: scrapy-container-1
+    depends_on:
+      - scraper-sql
+
+
+  scraper-sql:
+    image: mysql:latest
+    restart: always
+    container_name: scraper-sql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      
+    ports:
+      - "3333:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d
+
+
+
+
