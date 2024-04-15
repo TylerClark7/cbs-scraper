@@ -1,8 +1,8 @@
 # News Scraper
 ## Python / Scrapy / Docker
-![alt text](readme_img/terminal.png)
+![alt text](imgs/terminal.png)
 
-![alt text](readme_img/workbench.png)
+![alt text](imgs/workbench.png)
 
 
 
