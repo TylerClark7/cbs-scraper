@@ -66,7 +66,7 @@ $ cd docker
 $ docker compose -d        
 ```
 
-Your MySQL Docker container should now be up and running. Initial data present on the web page will be added into the DB. The Python script will NOT run again unless you run the docker container `python-image` again. The python script will NOT run agian unless you run the docker container <i>python-image</i> again. 
+Your MySQL Docker container should now be up and running. Initial data present on the web page will be added into the DB. The Python script will NOT run again unless you run the docker container `python-image` again.
 
 The Mysql runs on the netwrok "docker_default". When you run the container make sure you include the netwrok tag --network
 
