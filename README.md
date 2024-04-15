@@ -1,5 +1,10 @@
 # News Scraper
 ## Python / Scrapy / Docker
+![alt text](readme_img/terminal.png)
+
+![alt text](readme_img/workbench.png)
+
+
 
 ## A simple Scrapy Script that captures news articles and saves them to a DB
 ### How it works
